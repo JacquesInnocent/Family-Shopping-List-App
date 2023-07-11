@@ -36,7 +36,7 @@ function updateItem(item, key, value) {
 }
 
 function refreshList() {
-
+    
     items.sort((first,second) => {
         if (first.completed){
             return 1;
@@ -47,8 +47,6 @@ function refreshList() {
         }
         return first.description < second.description ? -1 : 1;
     })
-    
-}
 
 
     ITEMS_COLLECTION.innerHTML = "";
@@ -74,6 +72,7 @@ function refreshList() {
 
             ITEMS_COLLECTION.append(itemElement);
     }
+}
 
     ITEM_ADDITION_BUTTON.addEventListener('click', () => {
         addItem();
