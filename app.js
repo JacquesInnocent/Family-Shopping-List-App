@@ -3,6 +3,7 @@
 const ITEMS_COLLECTION = document.getElementById('items');
 const ITEM_TEMPLATE = document.getElementById('itemTemplate');
 const ITEM_ADDITION_BUTTON = document.getElementById('add');
+const ITEM_DELETE_BUTTON = document.getElementById('delete');
 
     let items = getItems();
 
@@ -25,13 +26,21 @@ function addItem(){
     });
 
     setItems(items)
-    refreshList();
+    refreshShoppingList();
 }
+
+
+
+/*To delete shopping list items
+
+
+*/
+
 
 function updateItem(item, key, value) {
     item[key] = value;
     setItems(items);
-    refreshList();
+    refreshShoppingList();
     
 }
 
@@ -47,6 +56,8 @@ function refreshList() {
         }
         return first.description < second.description ? -1 : 1;
     })
+    
+}
 
 
     ITEMS_COLLECTION.innerHTML = "";
@@ -54,59 +65,31 @@ function refreshList() {
     for (let item of items){
         let itemElement = ITEM_TEMPLATE.content.cloneNode(true);
             let descriptionInput = itemElement.querySelector('.item-description');
-                let completedInput = itemElement.querySelector('.item-completed');
+                let successfulinput = itemElement.querySelector('.item-completed');
 
             descriptionInput.value = item.description;
 
-            completedInput.checked = item.completed;
+            successfulinput.checked = item.completed;
 
 
                 descriptionInput.addEventListener("change", () => {
                     updateItem(item, "description", descriptionInput.value);
                 });
 
-                completedInput.addEventListener("change", () => {
-                    updateItem(item, "completed", completedInput.checked);
+                successfulinput.addEventListener("change", () => {
+                    updateItem(item, "completed", successfulinput.checked);
                 });
 
 
             ITEMS_COLLECTION.append(itemElement);
     }
-}
 
     ITEM_ADDITION_BUTTON.addEventListener('click', () => {
         addItem();
     });
 
-    refreshList();
-
-/* 
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-function refreshList() {
-        items.sort((a,b) => {
-            if (a.completed){
-                return 1;
-            }
-            if (b.completed) {
-                return -1;
-                
-            }
-            return a.description < b.description ? -1 : 1;
-        })
-        
-    } */
+    /* ITEM_DELETE_BUTTON.addEventListener('click', () => {
+        deleteItems();
+    });
+ */
+    refreshShoppingList();
