@@ -26,21 +26,25 @@ function addItem(){
     });
 
     setItems(items)
-    refreshShoppingList();
+    //refreshList();
 }
 
 
 
-/*To delete shopping list items
+// delete shopping list items
+
+function removeItems(){
+    localStorage.removeItem('shopping-list');
+}
 
 
-*/
+
 
 
 function updateItem(item, key, value) {
     item[key] = value;
     setItems(items);
-    refreshShoppingList();
+    refreshList();
     
 }
 
@@ -86,10 +90,12 @@ function refreshList() {
 
     ITEM_ADDITION_BUTTON.addEventListener('click', () => {
         addItem();
+        refreshList();
     });
 
-    /* ITEM_DELETE_BUTTON.addEventListener('click', () => {
-        deleteItems();
+    ITEM_DELETE_BUTTON.addEventListener('click', () => {
+        removeItems();
+        refreshList();
     });
- */
-    refreshShoppingList();
+ 
+
