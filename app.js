@@ -4,6 +4,7 @@ const ITEMS_COLLECTION = document.getElementById('items');
 const ITEM_TEMPLATE = document.getElementById('itemTemplate');
 const ITEM_ADDITION_BUTTON = document.getElementById('add');
 const ITEM_DELETE_BUTTON = document.getElementById('delete');
+const SINGLE_DELETE_BUTTON = document.getElementById('singleDelete');
 
     let items = getItems();
 
@@ -26,20 +27,22 @@ function addItem(){
     });
 
     setItems(items)
+
     //refreshList();
 }
 
-
-
 // delete shopping list items
 
-function removeItems(){
-    localStorage.removeItem('shopping-list');
+function removeItems () {
+    let value = localStorage.removeItem("shopping-list");
 }
 
-
-
-
+function removeSingleItem (item){
+    const value = localStorage.removeItem('item');
+    
+    refreshList();
+    window.location.reload();
+}
 
 function updateItem(item, key, value) {
     item[key] = value;
@@ -91,11 +94,19 @@ function refreshList() {
     ITEM_ADDITION_BUTTON.addEventListener('click', () => {
         addItem();
         refreshList();
+        window.location.reload();
     });
 
     ITEM_DELETE_BUTTON.addEventListener('click', () => {
         removeItems();
         refreshList();
+        window.location.reload();
     });
+
+    SINGLE_DELETE_BUTTON.addEventListener('click', () => {
+        removeSingleItem();
+        refreshList();
+        window.location.reload();
+    })
  
 
